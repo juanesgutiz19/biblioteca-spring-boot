@@ -19,7 +19,7 @@ public class Prestamo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "libro_id", nullable = false)
@@ -29,8 +29,8 @@ public class Prestamo {
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
 
-    @Column(name = "fecha_devolucion", nullable = false)
-    private LocalDate fechaDevolucion;
+    @Column(name = "fecha_maxima_devolucion", nullable = false)
+    private LocalDate fechaMaximaDevolucion;
 
     @Column(name = "creado_en", nullable = false)
     private LocalDateTime creadoEn;

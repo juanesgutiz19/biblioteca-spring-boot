@@ -17,9 +17,9 @@ import java.util.Set;
 public class Usuario {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+    @Column(name = "identificacion_usuario")
+    @Size(min = 7, max = 10)
+    private String identificacionUsuario;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "tipo_identificacion_id", nullable = false)

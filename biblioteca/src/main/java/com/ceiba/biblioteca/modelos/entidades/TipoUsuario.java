@@ -20,7 +20,7 @@ public class TipoUsuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @Column(name = "nombre", unique = true, nullable = false)
     @Enumerated(EnumType.STRING)

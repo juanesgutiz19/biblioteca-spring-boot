@@ -24,7 +24,7 @@ CREATE INDEX idx_nombre ON tipos_usuario (nombre);
 
 CREATE TABLE IF NOT EXISTS usuarios
 (
-    id                     INT PRIMARY KEY AUTO_INCREMENT,
+    id                     VARCHAR(10) PRIMARY KEY,
     tipo_identificacion_id INT      NOT NULL,
     tipo_usuario_id        INT      NOT NULL,
     nombre_completo        VARCHAR(60)  NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS prestamos
     id               INT PRIMARY KEY AUTO_INCREMENT,
     libro_id         INT           NOT NULL,
     usuario_id       INT           NOT NULL,
-    fecha_devolucion DATE          NOT NULL,
+    fecha_maxima_devolucion DATE          NOT NULL,
     creado_en        TIMESTAMP(6)  NOT NULL,
     actualizado_en   TIMESTAMP(6)  NOT NULL,
     FOREIGN KEY (libro_id) REFERENCES libros (id),
