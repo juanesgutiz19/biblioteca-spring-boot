@@ -1,0 +1,16 @@
+server:
+  port: 8000
+  address: 0.0.0.0
+
+# Configuracion base de datos en memoria
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
+  datasource:
+    url: jdbc:h2:mem:~/bibliotecaTest
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    platform: h2
