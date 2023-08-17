@@ -1,5 +1,6 @@
 package com.ceiba.biblioteca.excepciones;
 
+import com.ceiba.biblioteca.utilidades.MensajesConstantes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,33 +13,27 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @ControllerAdvice
 public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public ResponseEntity<ErrorMessage> resourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
-        ErrorMessage message = new ErrorMessage(
-                HttpStatus.NOT_FOUND.value(),
-                new Date(),
-                ex.getMessage(),
-                request.getDescription(false));
+    public ResponseEntity<MensajeError> resourceNotFoundException(ResourceNotFoundException ex) {
+        MensajeError message = new MensajeError(
+                ex.getMessage()
+        );
 
-        return new ResponseEntity<ErrorMessage>(message, HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorMessage> globalExceptionHandler(Exception ex, WebRequest request) {
+    public ResponseEntity<MensajeError> globalExceptionHandler(Exception ex) {
+        MensajeError message = new MensajeError(
+                ex.getMessage()
+        );
 
-        ErrorMessage message = new ErrorMessage(
-                HttpStatus.INTERNAL_SERVER_ERROR.value(),
-                new Date(),
-                ex.getMessage(),
-                request.getDescription(false));
-
-        return new ResponseEntity<ErrorMessage>(message, HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
@@ -48,16 +43,9 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
             HttpStatus status,
             WebRequest request) {
 
-        List<String> details = new ArrayList<String>();
-        details.add(ex.getMessage());
+        MensajeError message = new MensajeError(MensajesConstantes.JSON_MALFORMADO_MENSAJE);
 
-        ErrorMessage message = new ErrorMessage(
-                HttpStatus.BAD_REQUEST.value(),
-                new Date(),
-                "Malformed JSON request ",
-                request.getDescription(false));
-
-        return new ResponseEntity<Object>(message, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
     }
 
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
@@ -67,18 +55,12 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler {
             HttpStatus status,
             WebRequest request) {
 
-        List<String> details = new ArrayList<String>();
-        details.add(String.format("Could not find the %s method for URL %s", ex.getHttpMethod(), ex.getRequestURL()));
+        List<String> details = new ArrayList<>();
+        details.add(String.format(MensajesConstantes.METODO_URL_NO_ENCONTRADO_MENSAJE, ex.getHttpMethod(), ex.getRequestURL()));
 
-        ErrorMessage message = new ErrorMessage(
-                HttpStatus.NOT_FOUND.value(),
-                new Date(),
-                "Constraint Violation " + details,
-                request.getDescription(false));
-
-        return new ResponseEntity<Object>(message, HttpStatus.NOT_FOUND);
-
+        MensajeError message = new MensajeError(
+                MensajesConstantes.VIOLACION_CONSTRAINT_MENSAJE + " " + details
+        );
+        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
     }
-
-
 }

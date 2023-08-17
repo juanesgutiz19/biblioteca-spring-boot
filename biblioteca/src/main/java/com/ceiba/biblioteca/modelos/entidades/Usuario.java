@@ -43,10 +43,10 @@ public class Usuario {
     )
     private Set<Prestamo> prestamos;
 
-    @Column(name = "creado_en")
+    @Column(name = "creado_en", nullable = false)
     private LocalDateTime creadoEn;
 
-    @Column(name = "actualizado_en")
+    @Column(name = "actualizado_en", nullable = false)
     private LocalDateTime actualizadoEn;
 
 }
