@@ -34,6 +34,7 @@ public class Usuario {
     private String nombreCompleto;
 
     @Column(name = "email", unique = true, nullable = false)
+    @Size(min = 5, max = 60)
     private String email;
 
     @OneToMany(

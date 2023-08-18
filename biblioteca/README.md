@@ -83,5 +83,7 @@ Crear una API tipo REST la cual permita llevar a cabo las siguientes funcionalid
    3. Trata de no poner la lógica de negocio en los controladores, separa tu logica de acuerdo a las restricciones del patrón de arquitectura seleccionado.
 4. **Pruebas unitarias y de integración (deseable)**: valoramos si logra construir pruebas unitarias y de integración a su lógica de negocio.
 5. **Si el sistema identifica que la prueba no ha sido desarrollada por usted inmediatamente se cancela el proceso de selección**
-           
+
+## Enlace de la documentación con Swagger 2
+Tras correr la aplicación, se puede acceder al siguiente link en el cual se encuentra la documentación de la API (Con Swagger 2) [Link API biblioteca](http://localhost:8000/swagger-ui.html)
 

@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS usuarios
     tipo_identificacion_id INT      NOT NULL,
     tipo_usuario_id        INT      NOT NULL,
     nombre_completo        VARCHAR(60)  NOT NULL,
-    email                  VARCHAR(255) NOT NULL UNIQUE,
+    email                  VARCHAR(60) NOT NULL UNIQUE,
     creado_en              TIMESTAMP(6) NOT NULL,
     actualizado_en         TIMESTAMP(6) NOT NULL,
     FOREIGN KEY (tipo_identificacion_id) REFERENCES tipos_identificacion (id),

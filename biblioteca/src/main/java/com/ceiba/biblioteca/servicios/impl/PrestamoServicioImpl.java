@@ -31,7 +31,6 @@ public class PrestamoServicioImpl implements PrestamoServicio {
     private final UsuarioServicio usuarioServicio;
     private final LibroServicio libroServicio;
     private final PrestamoMapeador prestamoMapeador;
-    private static final NombreTipoUsuarioEnum TIPO_USUARIO_ENUM_INVITADO = NombreTipoUsuarioEnum.INVITADO;
 
     @Override
     public PrestamoRespuestaCreacionDto crearPrestamo(PrestamoPeticionDto prestamoPeticionDto) {
@@ -39,7 +38,6 @@ public class PrestamoServicioImpl implements PrestamoServicio {
         validarExistenciaUsuarioLibro(prestamoPeticionDto);
 
         TipoUsuario tipoUsuario = usuarioServicio.obtenerTipoUsuarioPorId(prestamoPeticionDto.getTipoUsuario());
-
         validarPrestamoParaInvitado(tipoUsuario, prestamoPeticionDto.getIdentificacionUsuario());
 
         LocalDate fechaMaximaDevolucionCalculada = calcularFechaDevolucionPrestamo(tipoUsuario.getNombre());
@@ -71,7 +69,7 @@ public class PrestamoServicioImpl implements PrestamoServicio {
     }
 
     private void validarPrestamoParaInvitado(TipoUsuario tipoUsuario, String identificacionUsuario) {
-        if (tipoUsuario.getNombre() == TIPO_USUARIO_ENUM_INVITADO) {
+        if (tipoUsuario.getNombre() == NombreTipoUsuarioEnum.INVITADO) {
             List<Prestamo> listaPrestamosDeUsuario = prestamoRepositorio.findByUsuarioIdentificacionUsuario(identificacionUsuario);
             if (!listaPrestamosDeUsuario.isEmpty()) {
                 String mensaje = String.format(MensajesConstantes.USUARIO_CON_LIBRO_PRESTADO_MENSAJE, identificacionUsuario);

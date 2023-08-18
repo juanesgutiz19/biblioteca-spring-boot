@@ -1,6 +1,5 @@
 package com.ceiba.biblioteca.servicios.impl;
 
-import com.ceiba.biblioteca.excepciones.BadRequestException;
 import com.ceiba.biblioteca.excepciones.ResourceNotFoundException;
 import com.ceiba.biblioteca.modelos.entidades.Libro;
 import com.ceiba.biblioteca.repositorios.LibroRepositorio;
