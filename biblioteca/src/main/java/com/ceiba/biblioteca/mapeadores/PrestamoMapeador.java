@@ -53,4 +53,5 @@ public interface PrestamoMapeador {
         }
         return Usuario.builder().identificacionUsuario(identificacionUsuario).build();
     }
+
 }

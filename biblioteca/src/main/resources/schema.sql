@@ -46,8 +46,6 @@ CREATE TABLE IF NOT EXISTS libros (
     actualizado_en TIMESTAMP(6) NOT NULL
 );
 
-CREATE INDEX idx_isbn ON libros (isbn);
-
 CREATE TABLE IF NOT EXISTS prestamos
 (
     id               INT PRIMARY KEY AUTO_INCREMENT,
@@ -74,13 +72,13 @@ VALUES ('AFILIADO', 'Usuario afiliado al sistema de bibliotecas', CURRENT_TIMEST
 
 -- Inserciones a la tabla usuarios
 INSERT INTO usuarios (identificacion_usuario, tipo_identificacion_id, tipo_usuario_id, nombre_completo, email, creado_en, actualizado_en)
-VALUES ('974148', 1, 1, 'Juan Rodriguez Mazo', 'juan@gmail.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-       ('7481545', 2, 2, 'Luisa Arciniegas Zuluaga', 'luisa@gmail.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-       ('1111111111', 3, 3, 'Adriana Pérez Arango', 'adriana@hotmail.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-       ('74851254', 3, 3, 'Jesús Pérez Arango', 'jesus@hotmail.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+VALUES ('974148', 1, 1, 'Juan Rodriguez Mazo', 'juan@test.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+       ('7481545', 2, 2, 'Luisa Arciniegas Zuluaga', 'luisa@test.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+       ('1111111111', 3, 3, 'Adriana Pérez Arango', 'adriana@test.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+       ('74851254', 3, 3, 'Jesús Solórzano caicedo', 'jesus@test.com', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
 
 -- Inserciones a la tabla libros
 INSERT INTO libros (isbn, titulo, ano_publicacion, resumen, creado_en, actualizado_en)
 VALUES ('ASDA7884', 'Cien años de soledad', 1967, 'Una novela icónica del realismo mágico.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
        ('AWQ489', 'Don Quijote de la Mancha', 1605, 'La famosa obra de Miguel de Cervantes.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-       ('EQWQW8545', 'Tin Tin', 1605, 'La famosa obra de Miguel de Cervantes.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+       ('EQWQW8545', 'Las aventuras de Tintín', 1929, 'A lo largo de las historias, Tintín se enfrenta a villanos, resuelve acertijos y explora lugares exóticos..', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

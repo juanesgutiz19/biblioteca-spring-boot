@@ -20,4 +20,5 @@ public class PrestamoPeticionDto {
 
     @NotNull
     private Integer tipoUsuario;
+
 }

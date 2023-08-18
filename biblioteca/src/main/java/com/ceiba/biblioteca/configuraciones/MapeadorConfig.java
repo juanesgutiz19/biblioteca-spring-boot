@@ -7,8 +7,10 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MapeadorConfig {
+
     @Bean
     public PrestamoMapeador prestamoMapeador() {
         return Mappers.getMapper(PrestamoMapeador.class);
     }
+
 }

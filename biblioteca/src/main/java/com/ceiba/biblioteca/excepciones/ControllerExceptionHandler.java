@@ -21,7 +21,6 @@ import java.util.List;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 
-
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<MensajeError> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                      NativeWebRequest request) {
@@ -72,31 +71,4 @@ public class ControllerExceptionHandler {
         return new ResponseEntity<>(message, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @ResponseStatus(code = HttpStatus.BAD_REQUEST)
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(
-            HttpMessageNotReadableException ex,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request) {
-
-        MensajeError message = new MensajeError(MensajesConstantes.JSON_MALFORMADO_MENSAJE);
-
-        return new ResponseEntity<>(message, HttpStatus.BAD_REQUEST);
-    }
-
-    @ResponseStatus(code = HttpStatus.NOT_FOUND)
-    protected ResponseEntity<Object> handleNoHandlerFoundException(
-            NoHandlerFoundException ex,
-            HttpHeaders headers,
-            HttpStatus status,
-            WebRequest request) {
-
-        List<String> details = new ArrayList<>();
-        details.add(String.format(MensajesConstantes.METODO_URL_NO_ENCONTRADO_MENSAJE, ex.getHttpMethod(), ex.getRequestURL()));
-
-        MensajeError message = new MensajeError(
-                MensajesConstantes.VIOLACION_CONSTRAINT_MENSAJE + " " + details
-        );
-        return new ResponseEntity<>(message, HttpStatus.NOT_FOUND);
-    }
 }

@@ -31,25 +31,19 @@ public class PrestamoServicioImpl implements PrestamoServicio {
     private final UsuarioServicio usuarioServicio;
     private final LibroServicio libroServicio;
     private final PrestamoMapeador prestamoMapeador;
+    private static final NombreTipoUsuarioEnum TIPO_USUARIO_ENUM_INVITADO = NombreTipoUsuarioEnum.INVITADO;
 
     @Override
     public PrestamoRespuestaCreacionDto crearPrestamo(PrestamoPeticionDto prestamoPeticionDto) {
-        // Validaciones de reglas de negocio
-        usuarioServicio.buscarPorIdentificacion(prestamoPeticionDto.getIdentificacionUsuario());
-        libroServicio.buscarPorIsbn(prestamoPeticionDto.getIsbn());
+
+        validarExistenciaUsuarioLibro(prestamoPeticionDto);
+
         TipoUsuario tipoUsuario = usuarioServicio.obtenerTipoUsuarioPorId(prestamoPeticionDto.getTipoUsuario());
-        NombreTipoUsuarioEnum nombreTipoUsuario = tipoUsuario.getNombre();
-        if (nombreTipoUsuario.name().equalsIgnoreCase("INVITADO")) {
-            List<Prestamo> listaPrestamosDeUsuario = prestamoRepositorio.findByUsuarioIdentificacionUsuario(prestamoPeticionDto.getIdentificacionUsuario());
-            if (!listaPrestamosDeUsuario.isEmpty()) {
-                throw new BadRequestException("El usuario con identificación " + prestamoPeticionDto.getIdentificacionUsuario() + " ya tiene un libro prestado por lo cual no se le puede realizar otro préstamo");
-            }
-        }
 
-        // Cálculo de fecha máxima de devolución
-        LocalDate fechaMaximaDevolucionCalculada = calcularFechaDevolucion(nombreTipoUsuario);
+        validarPrestamoParaInvitado(tipoUsuario, prestamoPeticionDto.getIdentificacionUsuario());
 
-        // Preparación de préstamo a guardar en la base de datos
+        LocalDate fechaMaximaDevolucionCalculada = calcularFechaDevolucionPrestamo(tipoUsuario.getNombre());
+
         Prestamo prestamoAGuardar = prestamoMapeador.prestamoPeticionDtoToPrestamo(prestamoPeticionDto);
         prestamoAGuardar.setFechaMaximaDevolucion(fechaMaximaDevolucionCalculada);
 
@@ -71,7 +65,22 @@ public class PrestamoServicioImpl implements PrestamoServicio {
         );
     }
 
-    private LocalDate calcularFechaDevolucion(NombreTipoUsuarioEnum nombreTipoUsuario) {
+    private void validarExistenciaUsuarioLibro(PrestamoPeticionDto prestamoPeticionDto) {
+        usuarioServicio.buscarPorIdentificacion(prestamoPeticionDto.getIdentificacionUsuario());
+        libroServicio.buscarPorIsbn(prestamoPeticionDto.getIsbn());
+    }
+
+    private void validarPrestamoParaInvitado(TipoUsuario tipoUsuario, String identificacionUsuario) {
+        if (tipoUsuario.getNombre() == TIPO_USUARIO_ENUM_INVITADO) {
+            List<Prestamo> listaPrestamosDeUsuario = prestamoRepositorio.findByUsuarioIdentificacionUsuario(identificacionUsuario);
+            if (!listaPrestamosDeUsuario.isEmpty()) {
+                String mensaje = String.format(MensajesConstantes.USUARIO_CON_LIBRO_PRESTADO_MENSAJE, identificacionUsuario);
+                throw new BadRequestException(mensaje);
+            }
+        }
+    }
+
+    private LocalDate calcularFechaDevolucionPrestamo(NombreTipoUsuarioEnum nombreTipoUsuario) {
         int numeroDeDiasASumar = 0;
         switch (nombreTipoUsuario) {
             case AFILIADO:
@@ -86,4 +95,5 @@ public class PrestamoServicioImpl implements PrestamoServicio {
         }
         return FechasUtilidades.agregarDiasOmitiendoFinesDeSemana(LocalDate.now(), numeroDeDiasASumar);
     }
+
 }
