@@ -18,7 +18,7 @@ public class Usuario {
 
     @Id
     @Column(name = "identificacion_usuario")
-    @Size(min = 7, max = 10)
+    @Size(min = 5, max = 10)
     private String identificacionUsuario;
 
     @ManyToOne(fetch = FetchType.LAZY)

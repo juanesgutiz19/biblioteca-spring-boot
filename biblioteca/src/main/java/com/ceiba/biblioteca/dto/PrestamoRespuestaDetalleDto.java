@@ -17,5 +17,5 @@ public class PrestamoRespuestaDetalleDto {
 
     private Integer tipoUsuario;
 
-    private LocalDate fechaMaximaDevolucion;
+    private String fechaMaximaDevolucion;
 }

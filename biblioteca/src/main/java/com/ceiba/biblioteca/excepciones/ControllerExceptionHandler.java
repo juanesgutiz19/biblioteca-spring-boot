@@ -55,7 +55,7 @@ public class ControllerExceptionHandler {
     }
 
     @ExceptionHandler(BadRequestException.class)
-    protected ResponseEntity<MensajeError> handleBadRequestException(
+    public ResponseEntity<MensajeError> handleBadRequestException(
             BadRequestException ex) {
 
         MensajeError message = new MensajeError(ex.getMessage());

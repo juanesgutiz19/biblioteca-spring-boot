@@ -14,3 +14,12 @@ spring:
     password:
     driver-class-name: org.h2.Driver
     platform: h2
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    database: h2
+    database-platform: org.hibernate.dialect.H2Dialect

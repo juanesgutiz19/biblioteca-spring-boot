@@ -2,15 +2,15 @@ package com.ceiba.biblioteca.controladores;
 
 import com.ceiba.biblioteca.dto.PrestamoPeticionDto;
 import com.ceiba.biblioteca.dto.PrestamoRespuestaCreacionDto;
+import com.ceiba.biblioteca.dto.PrestamoRespuestaDetalleDto;
 import com.ceiba.biblioteca.servicios.PrestamoServicio;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.http.MediaType;
+
+import java.util.UUID;
 
 @AllArgsConstructor
 @RestController
@@ -24,5 +24,11 @@ public class PrestamoControlador {
         PrestamoRespuestaCreacionDto prestamoRespuestaCreacionDto = prestamoServicio.crearPrestamo(prestamoPeticionDto);
         return ResponseEntity.status(HttpStatus.OK).body(prestamoRespuestaCreacionDto);
     }
+
+    @GetMapping("/{id-prestamo}")
+    public ResponseEntity<PrestamoRespuestaDetalleDto> obtenerPrestamoPorId(@PathVariable("id-prestamo") Integer prestamoId) {
+        return ResponseEntity.ok(prestamoServicio.obtenerPrestamoPorId(prestamoId));
+    }
+
 }
 

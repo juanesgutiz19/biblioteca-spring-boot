@@ -11,11 +11,11 @@ import javax.validation.constraints.Size;
 public class PrestamoPeticionDto {
 
     @NotNull
-    @Size(min = 10, max = 10)
+    @Size(min = 5, max = 10)
     private String isbn;
 
     @NotNull
-    @Size(min = 7, max = 10)
+    @Size(min = 5, max = 10)
     private String identificacionUsuario;
 
     @NotNull

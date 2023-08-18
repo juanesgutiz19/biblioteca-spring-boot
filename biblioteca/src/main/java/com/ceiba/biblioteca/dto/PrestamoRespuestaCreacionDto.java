@@ -13,6 +13,6 @@ public class PrestamoRespuestaCreacionDto {
 
     private Integer id;
 
-    private LocalDate fechaMaximaDevolucion;
+    private String fechaMaximaDevolucion;
 
 }
