@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS tipos_identificacion
 (
     id             INT PRIMARY KEY AUTO_INCREMENT,
-    abreviatura    VARCHAR(2)   NOT NULL UNIQUE,
+    abreviatura    VARCHAR(2)   NOT NULL,
     descripcion    VARCHAR(60)  NOT NULL,
     creado_en      TIMESTAMP(6) NOT NULL,
     actualizado_en TIMESTAMP(6) NOT NULL,
@@ -13,7 +13,7 @@ CREATE INDEX idx_abreviatura ON tipos_identificacion (abreviatura);
 CREATE TABLE IF NOT EXISTS tipos_usuario
 (
     id             INT PRIMARY KEY AUTO_INCREMENT,
-    nombre         VARCHAR(8)   NOT NULL UNIQUE,
+    nombre         VARCHAR(8)   NOT NULL,
     descripcion    VARCHAR(60)  NOT NULL,
     creado_en      TIMESTAMP(6) NOT NULL,
     actualizado_en TIMESTAMP(6) NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS prestamos
 (
     id               INT PRIMARY KEY AUTO_INCREMENT,
     libro_id         VARCHAR(10)           NOT NULL,
-    usuario_id       INT           NOT NULL,
+    usuario_id       VARCHAR(10)           NOT NULL,
     fecha_maxima_devolucion DATE          NOT NULL,
     creado_en        TIMESTAMP(6)  NOT NULL,
     actualizado_en   TIMESTAMP(6)  NOT NULL,
