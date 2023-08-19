@@ -8,10 +8,10 @@ import com.ceiba.biblioteca.repositorios.TipoUsuarioRepositorio;
 import com.ceiba.biblioteca.repositorios.UsuarioRepositorio;
 import com.ceiba.biblioteca.servicios.UsuarioServicio;
 import com.ceiba.biblioteca.utilidades.MensajesConstantes;
-import lombok.AllArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Service

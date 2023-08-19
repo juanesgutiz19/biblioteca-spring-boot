@@ -1,11 +1,11 @@
 package com.ceiba.biblioteca.modelos.entidades;
 
-import lombok.*;
-
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor

@@ -1,3 +1,4 @@
+-- DDL
 CREATE TABLE IF NOT EXISTS tipos_identificacion
 (
     id             INT PRIMARY KEY AUTO_INCREMENT,
@@ -58,6 +59,7 @@ CREATE TABLE IF NOT EXISTS prestamos
     FOREIGN KEY (usuario_id) REFERENCES usuarios (identificacion_usuario)
 );
 
+-- DML
 -- Inserciones a la tabla tipos_identificacion
 INSERT INTO tipos_identificacion (abreviatura, descripcion, creado_en, actualizado_en)
 VALUES ('CC', 'Cédula de Ciudadanía', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
@@ -81,4 +83,4 @@ VALUES ('974148', 1, 1, 'Juan Rodriguez Mazo', 'juan@test.com', CURRENT_TIMESTAM
 INSERT INTO libros (isbn, titulo, ano_publicacion, resumen, creado_en, actualizado_en)
 VALUES ('ASDA7884', 'Cien años de soledad', 1967, 'Una novela icónica del realismo mágico.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
        ('AWQ489', 'Don Quijote de la Mancha', 1605, 'La famosa obra de Miguel de Cervantes.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
-       ('EQWQW8545', 'Las aventuras de Tintín', 1929, 'A lo largo de las historias, Tintín se enfrenta a villanos, resuelve acertijos y explora lugares exóticos..', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+       ('EQWQW8545', 'Las aventuras de Tintín', 1929, 'A lo largo de las historias, Tintín se enfrenta a villanos, resuelve acertijos y explora lugares exóticos.', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

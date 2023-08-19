@@ -1,11 +1,12 @@
 package com.ceiba.biblioteca.modelos.entidades;
 
 import com.ceiba.biblioteca.modelos.enums.AbreviaturaTipoIdentificacionEnum;
-import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor

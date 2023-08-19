@@ -24,14 +24,12 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<MensajeError> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
                                                                      NativeWebRequest request) {
-
         return new ResponseEntity<>(
                 new MensajeError(
                         MensajesConstantes.DATOS_ENTRADA_INVALIDOS
                 ),
                 HttpStatus.BAD_REQUEST);
     }
-
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<MensajeError> handleIllegalArgumentException(final NativeWebRequest req,
@@ -42,7 +40,6 @@ public class ControllerExceptionHandler {
                 ),
                 HttpStatus.BAD_REQUEST);
     }
-
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<MensajeError> handleResourceNotFoundException(ResourceNotFoundException ex) {

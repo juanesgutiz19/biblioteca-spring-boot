@@ -77,6 +77,7 @@ public class UsuarioServicioImplTest {
 
     @Test
     public void cuandoObtengaElUsuarioPorIdentificacionExistenteEntoncesDevuelveElUsuarioCorrectamente() {
+        // Arrange
         String identificacion = "1547885744";
         Usuario usuario = Usuario.builder()
                 .identificacionUsuario(identificacion)
@@ -99,11 +100,12 @@ public class UsuarioServicioImplTest {
                 .creadoEn(LocalDateTime.now())
                 .actualizadoEn(LocalDateTime.now())
                 .build();
-
         when(usuarioRepositorio.findById(identificacion)).thenReturn(Optional.of(usuario));
 
+        // Act
         Usuario usuarioDevuelto = usuarioServicio.buscarPorIdentificacion(identificacion);
 
+        // Assert
         assertNotNull(usuarioDevuelto);
         assertEquals(usuario.getIdentificacionUsuario(), usuarioDevuelto.getIdentificacionUsuario());
         assertEquals(usuario.getTipoUsuario().getId(), usuarioDevuelto.getTipoUsuario().getId());
@@ -116,7 +118,6 @@ public class UsuarioServicioImplTest {
         assertEquals(usuario.getTipoIdentificacion().getDescripcion(), usuarioDevuelto.getTipoIdentificacion().getDescripcion());
         assertEquals(usuario.getTipoIdentificacion().getCreadoEn(), usuarioDevuelto.getTipoIdentificacion().getCreadoEn());
         assertEquals(usuario.getTipoIdentificacion().getActualizadoEn(), usuarioDevuelto.getTipoIdentificacion().getActualizadoEn());
-
         assertEquals(usuario.getNombreCompleto(), usuarioDevuelto.getNombreCompleto());
         assertEquals(usuario.getEmail(), usuarioDevuelto.getEmail());
         assertEquals(usuario.getCreadoEn(), usuarioDevuelto.getCreadoEn());

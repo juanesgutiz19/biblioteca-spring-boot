@@ -1,12 +1,13 @@
 package com.ceiba.biblioteca.modelos.entidades;
 
 import com.ceiba.biblioteca.modelos.enums.NombreTipoUsuarioEnum;
-import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+
+import lombok.*;
 
 @NoArgsConstructor
 @AllArgsConstructor

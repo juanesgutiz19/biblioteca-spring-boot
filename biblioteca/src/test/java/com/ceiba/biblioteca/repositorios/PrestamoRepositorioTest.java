@@ -1,8 +1,7 @@
 package com.ceiba.biblioteca.repositorios;
 
 import com.ceiba.biblioteca.modelos.entidades.*;
-import com.ceiba.biblioteca.modelos.enums.AbreviaturaTipoIdentificacionEnum;
-import com.ceiba.biblioteca.modelos.enums.NombreTipoUsuarioEnum;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,10 +14,6 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.assertj.core.api.Assertions.assertThat;
-
 
 @RunWith(SpringRunner.class)
 @DataJpaTest

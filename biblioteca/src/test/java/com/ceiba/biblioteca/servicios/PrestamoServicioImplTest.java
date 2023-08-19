@@ -13,6 +13,8 @@ import com.ceiba.biblioteca.repositorios.PrestamoRepositorio;
 import com.ceiba.biblioteca.servicios.impl.LibroServicioImpl;
 import com.ceiba.biblioteca.servicios.impl.PrestamoServicioImpl;
 import com.ceiba.biblioteca.servicios.impl.UsuarioServicioImpl;
+
+import com.ceiba.biblioteca.utilidades.FechasUtilidades;
 import org.junit.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
@@ -32,15 +34,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 @RunWith(SpringRunner.class)
+
+
 public class PrestamoServicioImplTest {
 
     @InjectMocks
     PrestamoServicioImpl prestamoServicio;
 
-    @InjectMocks
+    @Mock
     UsuarioServicioImpl usuarioServicio;
 
-    @InjectMocks
+    @Mock
     LibroServicioImpl libroServicio;
 
     @Mock
@@ -122,68 +126,74 @@ public class PrestamoServicioImplTest {
         });
     }
 
-    /**
-     * @Test public void cuandoSeEnvianDatosValidosElPrestamoEsCreadoSatisfactoriamente() {
-     * PrestamoPeticionDto peticionDto = PrestamoPeticionDto.builder()
-     * .identificacionUsuario("1123445322")
-     * .isbn("DASD154212")
-     * .tipoUsuario(1)
-     * .build();
-     * TipoUsuario tipoUsuario = TipoUsuario.builder()
-     * .id(1)
-     * .nombre(NombreTipoUsuarioEnum.AFILIADO)
-     * .descripcion("Usuario afiliado de la biblioteca")
-     * .creadoEn(LocalDateTime.now())
-     * .actualizadoEn(LocalDateTime.now())
-     * .build();
-     * when(usuarioServicio.obtenerTipoUsuarioPorId(peticionDto.getTipoUsuario())).thenReturn(tipoUsuario);
-     * <p>
-     * Prestamo prestamo = Prestamo.builder()
-     * .id(1)
-     * .usuario(Usuario.builder()
-     * .identificacionUsuario("1123445322")
-     * .tipoUsuario(TipoUsuario.builder()
-     * .id(1)
-     * .nombre(NombreTipoUsuarioEnum.INVITADO)
-     * .descripcion("Usuario invitado de la biblioteca")
-     * .creadoEn(LocalDateTime.now())
-     * .actualizadoEn(LocalDateTime.now())
-     * .build())
-     * .tipoIdentificacion(TipoIdentificacion.builder()
-     * .id(1)
-     * .abreviatura(AbreviaturaTipoIdentificacionEnum.CC)
-     * .descripcion("Cédula de ciudadanía")
-     * .creadoEn(LocalDateTime.now())
-     * .actualizadoEn(LocalDateTime.now())
-     * .build())
-     * .nombreCompleto("Erika Sofia Cardona Zuluaga")
-     * .email("erika@test.com")
-     * .creadoEn(LocalDateTime.now())
-     * .actualizadoEn(LocalDateTime.now())
-     * .build())
-     * .libro(Libro.builder()
-     * .isbn("DASD154212")
-     * .anoPublicacion(1947)
-     * .titulo("Nineteen Eighty-Four")
-     * .resumen("Una novela distópica de George Orwell que describe un futuro totalitario y opresivo en el que el gobierno controla cada aspecto de la vida de las personas.")
-     * .creadoEn(LocalDateTime.now())
-     * .actualizadoEn(LocalDateTime.now())
-     * .build())
-     * .creadoEn(LocalDateTime.now())
-     * .actualizadoEn(LocalDateTime.now())
-     * .build();
-     * <p>
-     * when(prestamoMapeador.prestamoPeticionDtoToPrestamo(peticionDto)).thenReturn(prestamo);
-     * when(prestamoRepositorio.save(any(Prestamo.class))).thenReturn(new Prestamo());
-     * when(prestamoMapeador.prestamoToPrestamoRespuestaCreacionDto(any(Prestamo.class))).thenReturn(new PrestamoRespuestaCreacionDto());
-     * <p>
-     * PrestamoRespuestaCreacionDto respuesta = prestamoServicio.crearPrestamo(peticionDto);
-     * <p>
-     * assertNotNull(respuesta);
-     * }
-     **/
+    @Test
+    public void cuandoSeEnvianDatosValidosElPrestamoEsCreadoSatisfactoriamente() {
+        // Arrange
+        LocalDate fechaMaximaDevolucion = LocalDate.now();
+        PrestamoPeticionDto peticionDto = PrestamoPeticionDto.builder()
+                .identificacionUsuario("1123445322")
+                .isbn("DASD154212")
+                .tipoUsuario(1)
+                .build();
+        TipoUsuario tipoUsuario = TipoUsuario.builder()
+                .id(1)
+                .nombre(NombreTipoUsuarioEnum.AFILIADO)
+                .descripcion("Usuario afiliado de la biblioteca")
+                .creadoEn(LocalDateTime.now())
+                .actualizadoEn(LocalDateTime.now())
+                .build();
+        when(usuarioServicio.obtenerTipoUsuarioPorId(peticionDto.getTipoUsuario())).thenReturn(tipoUsuario);
+        Prestamo prestamo = Prestamo.builder()
+                .id(1)
+                .usuario(Usuario.builder()
+                        .identificacionUsuario("1123445322")
+                        .tipoUsuario(TipoUsuario.builder()
+                                .id(1)
+                                .nombre(NombreTipoUsuarioEnum.INVITADO)
+                                .descripcion("Usuario invitado de la biblioteca")
+                                .creadoEn(LocalDateTime.now())
+                                .actualizadoEn(LocalDateTime.now())
+                                .build())
+                        .tipoIdentificacion(TipoIdentificacion.builder()
+                                .id(1)
+                                .abreviatura(AbreviaturaTipoIdentificacionEnum.CC)
+                                .descripcion("Cédula de ciudadanía")
+                                .creadoEn(LocalDateTime.now())
+                                .actualizadoEn(LocalDateTime.now())
+                                .build())
+                        .nombreCompleto("Erika Sofia Cardona Zuluaga")
+                        .email("erika@test.com")
+                        .creadoEn(LocalDateTime.now())
+                        .actualizadoEn(LocalDateTime.now())
+                        .build())
+                .libro(Libro.builder()
+                        .isbn("DASD154212")
+                        .anoPublicacion(1947)
+                        .titulo("Nineteen Eighty-Four")
+                        .resumen("Una novela distópica de George Orwell que describe un futuro totalitario y opresivo en el que el gobierno controla cada aspecto de la vida de las personas.")
+                        .creadoEn(LocalDateTime.now())
+                        .actualizadoEn(LocalDateTime.now())
+                        .build())
+                .creadoEn(LocalDateTime.now())
+                .actualizadoEn(LocalDateTime.now())
+                .build();
+        prestamo.setFechaMaximaDevolucion(fechaMaximaDevolucion);
+        PrestamoRespuestaCreacionDto prestamoRespuestaCreacionDto = PrestamoRespuestaCreacionDto.builder()
+                .fechaMaximaDevolucion(FechasUtilidades.agregarDiasOmitiendoFinesDeSemana(fechaMaximaDevolucion, 7).format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
+                .id(1)
+                .build();
+        when(prestamoMapeador.prestamoPeticionDtoToPrestamo(peticionDto)).thenReturn(prestamo);
+        when(prestamoRepositorio.save(any(Prestamo.class))).thenReturn(prestamo);
+        when(prestamoMapeador.prestamoToPrestamoRespuestaCreacionDto(prestamo)).thenReturn(prestamoRespuestaCreacionDto);
 
-    /**
+        // Act
+        PrestamoRespuestaCreacionDto prestamoRespuestaCreacionDtoDevuelto = prestamoServicio.crearPrestamo(peticionDto);
+
+        // Assert
+        assertNotNull(prestamoRespuestaCreacionDtoDevuelto);
+        assertEquals(prestamo.getId(), prestamoRespuestaCreacionDtoDevuelto.getId());
+    }
+
     @Test
     public void cuandoUnUsuarioInvitadoCreaUnPrestamoConUnPrestamoYaExistenteSeLanzaUnaBadRequestException() {
         PrestamoPeticionDto peticionDto = PrestamoPeticionDto.builder()
@@ -275,6 +285,4 @@ public class PrestamoServicioImplTest {
             prestamoServicio.crearPrestamo(peticionDto);
         });
     }
-    **/
-
 }
